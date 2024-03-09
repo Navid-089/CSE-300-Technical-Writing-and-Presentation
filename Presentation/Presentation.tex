@@ -1,0 +1,848 @@
+\documentclass{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{spruce}
+
+\usepackage{graphicx}
+\setbeamercolor{section in head/foot}{bg=red!50}
+\setbeamercolor{subsection in head/foot}{bg=red!30}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes.geometric}
+
+\title{Intro to Beamer}
+\subtitle{This is a subtitle}
+\author[Wahid, Irtiaz, Sadi]{Wahid AL Azad Navid \and Md. Irtiaz Kabir \and Sadatul Islam Sadi}
+\institute[CSE, BUET]{Department of CSE \\ Bangladesh University of Engineering and Technology}
+\date{February 20, 2024}
+
+\AtBeginSection{
+  \begin{frame}{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+
+\begin{document}
+\maketitle
+
+\section{Drawbacks}
+\begin{frame}{Drawbacks}
+  \begin{block}{\textbf{Traversing unnecessarily}}
+    When we are eager to know the distance from the source to a particular node, Dijkstra's algorithm may result in a longer run-time.
+  \end{block}
+
+ \end{frame}
+
+ \begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[draw,circle,black,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+     \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[gray,thick,->] (S.east) -- node[above] {2} (A.north)
+      \draw[gray,thick,->] (S.west) -- node[above] {8} (D.north)
+      \draw[gray,thick,->] (A.south) -- node[right] {2} (B.north)
+      \draw[gray,thick,->] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {2} (D.south)
+    \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[draw,circle,black,thick, text width = 0.75cm, text centered,font = \small] (S) {S}
+      \node[above of = S, yshift = -1cm] (S'){S}
+     \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[gray,thick,->] (S.east) -- node[above] {2} (A.north)
+      \draw[gray,thick,->] (S.west) -- node[above] {8} (D.north)
+      \draw[gray,thick,->] (A.south) -- node[right] {2} (B.north)
+      \draw[gray,thick,->] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {$\infty$}
+      \node[right of = B, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = C, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = D, xshift = 0.1cm, text = red] {$\infty$}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+      \node[above of = S, yshift = -1cm] (S'){S}
+     \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[gray,thick,->] (S.east) -- node[above] {2} (A.north)
+      \draw[gray,thick,->] (S.west) -- node[above] {8} (D.north)
+      \draw[gray,thick,->] (A.south) -- node[right] {2} (B.north)
+      \draw[gray,thick,->] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {$\infty$}
+      \node[right of = B, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = C, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = D, xshift = 0.1cm, text = red] {$\infty$}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[gray,thick,->] (A.south) -- node[right] {2} (B.north)
+      \draw[gray,thick,->] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = C, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[gray,thick,->] (A.south) -- node[right] {2} (B.north)
+      \draw[gray,thick,->] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = C, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[black,thick,->, line width = 2pt] (A.south) -- node[right] {2} (B.north)
+      \draw[gray,thick,->] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {4}
+      \node[left of = C, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[black,thick,->, line width = 2pt] (A.south) -- node[right] {2} (B.north)
+      \draw[gray,thick,->] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {4}
+      \node[left of = C, xshift = 0.1cm, text = red] {$\infty$}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[black,thick,->, line width = 2pt] (A.south) -- node[right] {2} (B.north)
+      \draw[black,thick,->, line width = 2pt] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {4}
+      \node[left of = C, xshift = 0.1cm, text = red] {6}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[black,thick,->, line width = 2pt] (A.south) -- node[right] {2} (B.north)
+      \draw[black,thick,->, line width = 2pt] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {4}
+      \node[left of = C, xshift = 0.1cm, text = red] {6}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[black,thick,->, line width = 2pt] (A.south) -- node[right] {2} (B.north)
+      \draw[black,thick,->, line width = 2pt] (B.west) -- node[above] {2} (C.east)
+      \draw[gray,thick,->] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {4}
+      \node[left of = C, xshift = 0.1cm, text = red] {6}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[black,thick,->, line width = 2pt] (A.south) -- node[right] {2} (B.north)
+      \draw[black,thick,->, line width = 2pt] (B.west) -- node[above] {2} (C.east)
+      \draw[black,thick,->, line width = 2pt] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {4}
+      \node[left of = C, xshift = 0.1cm, text = red] {6}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      \node[right of = D, xshift = 0.4cm, text = blue] { 8$<$(6 +3) }
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+ 
+\end{frame}
+
+\begin{frame}{{Traversing unnecessarily}}
+ \begin{itemize}
+     \item Find the shortest distance from S to D \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (S) {S}
+   
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, right of = S, xshift = 2cm, yshift = -1cm ] (A) {A}
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = S, left of = S, xshift = -2cm, yshift = -1cm ] (D) {D}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = D, yshift = -1.5cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -1.5cm ] (B) {B}
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {2} (A.north)
+      \draw[black,thick,->, line width = 2pt] (S.west) -- node[above] {8} (D.north)
+      \draw[black,thick,->, line width = 2pt] (A.south) -- node[right] {2} (B.north)
+      \draw[black,thick,->, line width = 2pt] (B.west) -- node[above] {2} (C.east)
+      \draw[black,thick,->, line width = 2pt] (C.north) -- node[left] {3} (D.south)
+
+
+      \node[above of = S, yshift = 0.1cm, text = red] {0}
+      \node[right of = A, xshift = 0.1cm, text = red] {2}
+      \node[right of = B, xshift = 0.1cm, text = red] {4}
+      \node[left of = C, xshift = 0.1cm, text = red] {6}
+      \node[left of = D, xshift = 0.1cm, text = red] {8}
+      
+      
+      \end{tikzpicture}
+ \end{center}
+
+ 
+\end{frame}
+
+
+
+
+\begin{frame}{Drawbacks}
+  \begin{block}{\textbf{Fails in case of negative weight edge}}
+    If a graph contains negative weight edge(s), the algorithm may often produce wrong results.
+  \end{block}
+
+
+
+ \end{frame}
+
+
+ \begin{frame}{{Negative Weight Issue}}
+ \begin{itemize}
+     \item Find the shortest distance from S to C \\ 
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     \node[draw,circle,black,thick,text width = 0.75cm, text centered,font = \small] (A) {A}
+     
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, left of = A, xshift = -2cm, yshift = -1cm ] (S) {S}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, right of = A, xshift = 2cm, yshift = -1cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -3cm ] (B) {B}
+   
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[gray,thick,->] (S.east) -- node[above] {5} (A.west)
+       \draw[gray,thick,->] (S.east) -- node[below] {6} (B.west)
+        \draw[gray,thick,->] (B.north) -- node[right] {-2} (A.south)
+         \draw[gray,thick,->] (A.east) -- node[above] {3} (C.west)
+
+     \node[above of = S, yshift = 0.05cm, text = red] {0}
+      \node[above of = A, yshift = 0.05cm, text=red] {$\infty$}
+      \node[below of = B, yshift = -0.05cm, text = red] {$\infty$}
+      \node[above of = C, yshift = 0.05cm, text = red] {$\infty$}
+      
+     \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+
+ \begin{frame}{{Negative Weight Issue}}
+ \begin{itemize}
+     \item Find the shortest distance from S to C \\
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     
+     \node[draw,circle,black,thick,text width = 0.75cm, text centered,font = \small] (A) {A}
+     
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, left of = A, xshift = -2cm, yshift = -1cm ] (S) {S}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, right of = A, xshift = 2cm, yshift = -1cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -3cm ] (B) {B}
+   
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {5} (A.west)
+       \draw[black,thick,->, line width = 2pt] (S.east) -- node[below] {6} (B.west)
+        \draw[gray,thick,->] (B.north) -- node[right] {-2} (A.south)
+         \draw[gray,thick,->] (A.east) -- node[above] {3} (C.west)
+
+     \node[above of = S, yshift = 0.05cm, text = red] {0}
+      \node[above of = A, yshift = 0.05cm, text=red] {5}
+      \node[below of = B, yshift = -0.05cm, text = red] {6}
+      \node[above of = C, yshift = 0.05cm, text = red] {$\infty$}
+      
+     \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+ \begin{frame}{{Negative Weight Issue}}
+ \begin{itemize}
+     \item Find the shortest distance from S to C \\
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (A) {A}
+     
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, left of = A, xshift = -2cm, yshift = -1cm ] (S) {S}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, right of = A, xshift = 2cm, yshift = -1cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -3cm ] (B) {B}
+   
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {5} (A.west)
+       \draw[black,thick,->, line width = 2pt] (S.east) -- node[below] {6} (B.west)
+        \draw[gray,thick,->] (B.north) -- node[right] {-2} (A.south)
+         \draw[gray,thick,->] (A.east) -- node[above] {3} (C.west)
+
+     \node[above of = S, yshift = 0.05cm, text = red] {0}
+      \node[above of = A, yshift = 0.05cm, text=red] {5}
+      \node[below of = B, yshift = -0.05cm, text = red] {6}
+      \node[above of = C, yshift = 0.05cm, text = red] {$\infty$}
+      
+     \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+
+
+ \begin{frame}{{Negative Weight Issue}}
+ \begin{itemize}
+     \item Find the shortest distance from S to C \\
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (A) {A}
+     
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, left of = A, xshift = -2cm, yshift = -1cm ] (S) {S}
+      \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, right of = A, xshift = 2cm, yshift = -1cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -3cm ] (B) {B}
+   
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {5} (A.west)
+       \draw[black,thick,->, line width = 2pt] (S.east) -- node[below] {6} (B.west)
+        \draw[gray,thick,->] (B.north) -- node[right] {-2} (A.south)
+         \draw[black,thick,->, line width = 2pt] (A.east) -- node[above] {3} (C.west)
+
+     \node[above of = S, yshift = 0.05cm, text = red] {0}
+      \node[above of = A, yshift = 0.05cm, text=red] {5}
+      \node[below of = B, yshift = -0.05cm, text = red] {6}
+      \node[above of = C, yshift = 0.05cm, text = red] {8}
+      
+     \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+ \begin{frame}{{Negative Weight Issue}}
+ \begin{itemize}
+     \item Find the shortest distance from S to C \\
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (A) {A}
+     
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, left of = A, xshift = -2cm, yshift = -1cm ] (S) {S}
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, right of = A, xshift = 2cm, yshift = -1cm ] (C) {C}
+    \node[draw,circle,black,thick, text width = 0.75cm, text centered, below of = A, yshift = -3cm ] (B) {B}
+   
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {5} (A.west)
+       \draw[black,thick,->, line width = 2pt] (S.east) -- node[below] {6} (B.west)
+        \draw[gray,thick,->] (B.north) -- node[right] {-2} (A.south)
+         \draw[black,thick,->, line width = 2pt] (A.east) -- node[above] {3} (C.west)
+
+     \node[above of = S, yshift = 0.05cm, text = red] {0}
+      \node[above of = A, yshift = 0.05cm, text=red] {5}
+      \node[below of = B, yshift = -0.05cm, text = red] {6}
+      \node[above of = C, yshift = 0.05cm, text = red] {8}
+      
+     \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+ \begin{frame}{{Negative Weight Issue}}
+ \begin{itemize}
+     \item Find the shortest distance from S to C \\
+    
+ \end{itemize}
+ \vspace{0.5cm}
+ \begin{center}
+ \begin{tikzpicture}
+     
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (A) {A}
+     
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, left of = A, xshift = -2cm, yshift = -1cm ] (S) {S}
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, right of = A, xshift = 2cm, yshift = -1cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -3cm ] (B) {B}
+   
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {5} (A.west)
+       \draw[black,thick,->, line width = 2pt] (S.east) -- node[below] {6} (B.west)
+        \draw[red,thick,->, line width = 2pt] (B.north) -- node[right] {-2}  (A.south)
+         \draw[black,thick,->, line width = 2pt] (A.east) -- node[above] {3} (C.west)
+
+     \node[above of = S, yshift = 0.05cm, text = red] {0}
+      \node[above of = A, yshift = 0.05cm, text=red] {5}
+      \node[below of = B, yshift = -0.05cm, text = red] {6}
+      \node[above of = C, yshift = 0.05cm, text = red] {8}
+   \node[below of = A, left of= A, yshift = -0.05cm, xshift = 1cm, text=blue, font=\tiny] {Already visited!};
+
+      
+     \end{tikzpicture}
+ \end{center}
+
+\end{frame}
+
+ \begin{frame}{{Negative Weight Issue}}
+
+ \begin{center}
+ \begin{tikzpicture}
+     
+     
+     \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered,font = \small] (A) {A}
+     
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, left of = A, xshift = -2cm, yshift = -1cm ] (S) {S}
+      \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, right of = A, xshift = 2cm, yshift = -1cm ] (C) {C}
+    \node[fill = lime, draw = black, circle,thick,text width = 0.75cm, text centered, below of = A, yshift = -3cm ] (B) {B}
+   
+    
+      
+      % \node {draw, circle, black, thick, text width }
+
+      \draw[black,thick,->, line width = 2pt] (S.east) -- node[above] {5} (A.west)
+       \draw[black,thick,->, line width = 2pt] (S.east) -- node[below] {6} (B.west)
+        \draw[red,thick,->, line width = 2pt] (B.north) -- node[right] {-2}  (A.south)
+         \draw[black,thick,->, line width = 2pt] (A.east) -- node[above] {3} (C.west)
+
+     \node[above of = S, yshift = 0.05cm, text = red] {0}
+      \node[above of = A, yshift = 0.05cm, text=red] {5}
+      \node[below of = B, yshift = -0.05cm, text = red] {6}
+      \node[above of = C, yshift = 0.05cm, text = red] {8}
+   \node[below of = A, left of= A, yshift = -0.05cm, xshift = 1cm, text=blue, font=\tiny] {Already visited!};
+
+      
+     \end{tikzpicture}
+ \end{center}
+
+ \begin{itemize}
+     \item<1> \only<1> {Thus, the algorithm gives us the shortest distance of 8 by taking the path $S\rightarrow A\rightarrow C$}
+      \item<2> \only<2> {However, taking the path $S\rightarrow B\rightarrow A\rightarrowC$ would result in a shorter distance of $6-2+3 = 7$}
+ \end{itemize}
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Specialized variants}
+% Add your content for the Specialized variants section here
+\begin{frame}{Specialized variants}
+
+\begin{itemize}
+    \item<1-> When arc weights are small integers (bounded by a parameter C), specialized queues which take advantage of this fact can be used to speed up Dijkstra's algorithm.
+\end{itemize}
+\begin{table}[h]
+    \centering
+  
+    \begin{tabular}{|m|m|c|}
+    \hline
+         \onslide<1->{Name} & \onslide<1->{Data Structure} & \onslide<1->{Running Time} \\ 
+         \hline 
+         \onslide<1->{Dial's algorithm} & \onslide<1->{Bucket queue} & \onslide<1->{$O(|E| + |V|*C)$} \\ 
+         \hline
+         \onslide<2->{Van Embde Boas Tree} & \onslide<2->{Priority Queue} & \onslide<2->{$O(|E| loglogC)$} \\ 
+         \hline 
+         \onslide<3->{Ahuja \textit{et al.}} & \onslide<3->{Fibonacci Heap} & \onslide<3->{$O(|E| + |V| \sqrt{logC})$} \\
+         \hline 
+          
+         
+    \end{tabular}
+   
+    \label{tab:my_label}
+\end{table}
+
+
+    
+\end{frame}
+
+
+
+
+
+\section{Application Scenarios}
+% Add your content for the Application Scenarios section here
+\begin{frame}{Frame Title}
+    
+\begin{itemize}
+    \item <1> \only<1> {\textbf{Routing Protocols in Computer Networks:} \\
+    Dijkstra's algorithm is often used in routing protocols such as OSPF (Open Shortest Path First) and IS-IS (Intermediate System to Intermediate System)}
+    \item <2> \only<2> {\textbf{GPS Navigation Systems:} \\ 
+    In GPS navigation, Dijkstra's algorithm is employed to find the shortest route between two locations, considering factors like distance, traffic conditions, and road types.}
+
+    \item<3> \only<3> {\textbf{Game Development: }\\ 
+    In video games, especially those involving maps and navigation, Dijkstra's algorithm can be employed to create intelligent and efficient path-finding for characters or objects.}
+
+    \item<4> \only<4> {\textbf{Resource Management in Operating Systems: }\\
+    Dijkstra's algorithm is applied in resource management to allocate resources optimally.
+    }
+
+    
+\end{itemize}
+
+\end{frame}
+
+\end{document}
